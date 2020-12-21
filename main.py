@@ -14,15 +14,12 @@ class MainWindow(QObject):
         self.window = loader.load(ui_file)
         ui_file.close()
         
-        self.line = self.window.findChild(QLineEdit, 'lineEdit')
-        
         btn = self.window.findChild(QPushButton, 'pushButton')
         btn.clicked.connect(self.ok_handler)
         self.window.show()
 
     def ok_handler(self):
-        language = 'None' if not self.line.text() else self.line.text()
-        print('Favorite language: {}'.format(language))
+        print("It works")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
