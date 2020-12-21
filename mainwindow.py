@@ -38,7 +38,7 @@ class Ui_MainWindow(object):
 
         self.menuApplication_pour_renommer_les_photos = QMenu(self.menubar)
         self.menuApplication_pour_renommer_les_photos.setObjectName(u"menuApplication_pour_renommer_les_photos")
-        
+
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -57,4 +57,5 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Renommer les photos", None))
         self.menuApplication_pour_renommer_les_photos.setTitle(QCoreApplication.translate("MainWindow", u"Application pour renommer les photos", None))
     # retranslateUi
+
 

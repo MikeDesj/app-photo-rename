@@ -1,18 +1,30 @@
 import sys
 from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import QFile, QIODevice
-from mainwindow import Ui_MainWindow
+from PySide6.QtWidgets import QApplication, QPushButton, QLineEdit
+from PySide6.QtCore import QFile, QObject
 
+class MainWindow(QObject):
+    
+    def __init__(self, ui_file, parent=None):
+        super(MainWindow, self).__init__(parent)
+        ui_file = QFile(ui_file)
+        ui_file.open(QFile.ReadOnly)
+        
+        loader = QUiLoader()
+        self.window = loader.load(ui_file)
+        ui_file.close()
+        
+        self.line = self.window.findChild(QLineEdit, 'lineEdit')
+        
+        btn = self.window.findChild(QPushButton, 'pushButton')
+        btn.clicked.connect(self.ok_handler)
+        self.window.show()
 
+    def ok_handler(self):
+        language = 'None' if not self.line.text() else self.line.text()
+        print('Favorite language: {}'.format(language))
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app = QApplication(sys.argv)
-
-    window = QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(window)
-
-    window.show()
-
+    form = MainWindow('mainwindow.ui')
     sys.exit(app.exec_())
